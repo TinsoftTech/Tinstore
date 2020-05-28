@@ -2,7 +2,7 @@
 var bodyParser = require("body-parser");
 var urlencodedParser = bodyParser.urlencoded({extended:false});
 var mongoose =require("mongoose");
-mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://127.0.0.1:27017/tinstoreapp');
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://tinsoft:G9TgJvTORPvhhipqxPw412PqjrbDJRZTwcuOXzBzlldlh7TjEKAq9ULeK4W4K1yqsyicO9EpMlXYruVboKcBdw==@tinsoft.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@tinsoft@');
 var notificationSchema = new mongoose.Schema({
   
     content:String,
