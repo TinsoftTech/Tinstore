@@ -1,0 +1,70 @@
+body{
+    margin:0;
+    background:black;
+}
+nav{
+    padding:25px;
+    background:crimson;
+}
+h1{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-align:center;color:green;
+}
+h2{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-align:center;color:cornflowerblue;
+}
+ul{
+    margin:0;
+}
+button,input{
+    width:30%;
+    margin:15px;
+    display: block;
+  padding:15px;  
+}
+button{
+    font-family:sans-serif;
+    color:white; 
+    background:seagreen;   
+}
+label{
+    margin:15px;
+    font-family:sans-serif;
+    color:white;  
+}
+.profile-card > ul li{
+    display:block;
+    padding:5px 0px;
+ }
+ul li{
+   display:inline;
+}
+ul li a{
+    color:white;
+   padding:10px 25px;
+   background:coral;
+   opacity:0.7;
+   text-decoration:none;
+   font-family: Verdana, Geneva, Tahoma, sans-serif;
+ }
+ li a:hover{background:white;color:coral;}
+.profile-card{
+    font-family:sans-serif;
+    width:250px;
+    height:350px;
+    background:gainsboro;
+    padding:14px;
+    border-radius:5px;
+}
+.round-img{
+    height:75px;
+    width:75px;
+    border-radius:50%;
+}
+li{
+    color:white;
+    display: block;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+footer{color:white;}

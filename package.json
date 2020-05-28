@@ -1,0 +1,29 @@
+{
+  "name": "tinstoreapp",
+  "version": "1.0.0",
+  "description": "my store app",
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "mongoose": "^5.7.13"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/viktinho56/Tinstoreapp.git"
+  },
+  "keywords": [
+    "store"
+  ],
+  "author": "tinsoft",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/viktinho56/Tinstoreapp/issues"
+  },
+  "homepage": "https://github.com/viktinho56/Tinstoreapp#readme"
+}
