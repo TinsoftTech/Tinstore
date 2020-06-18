@@ -42,7 +42,7 @@ var  Todo = mongoose.model('Buyers',buyerSchema);
 }); */
 module.exports = function (app) {
     //show all stores
-    app.get("/api/buyers",function(req,res){
+       app.get("/api/buyers",function(req,res){
         Todo.find({},function(err,data){
             if (err) throw err;
             res.send({buyers:data});
@@ -177,7 +177,6 @@ app.delete("/api/buyers/remove/:id", function (req, res) {
             })
         });
 
-        //update
    app.put("/api/buyers/updateavatar/:id",urlencodedParser,function(req,res){
             Todo.findById(req.params.id.replace(/\-/g," "),function(err,data){
 
@@ -269,7 +268,6 @@ app.delete("/api/buyers/remove/:id", function (req, res) {
 
 
 
-
                 app.put("/api/buyers/updatepassword/:id",urlencodedParser,function(req,res){
                     // data.push(req.body);
                     // res.json(data);
@@ -311,5 +309,4 @@ app.delete("/api/buyers/remove/:id", function (req, res) {
        //
       //  res.render("todo",{todos:data});
                 });
-});
 }
