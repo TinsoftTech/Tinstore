@@ -311,4 +311,5 @@ app.delete("/api/buyers/remove/:id", function (req, res) {
        //
       //  res.render("todo",{todos:data});
                 });
+});
 }
