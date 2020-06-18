@@ -12,6 +12,7 @@ mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://tinsoft:'+encodeURICompo
  }); 
 var buyerSchema = new mongoose.Schema({
     fullname:String,
+    avatar:String,
     email:String,
     password:String,
     gender:String,
@@ -77,6 +78,31 @@ console.log({buyers:data});
         })
 
     });
+app.delete("/api/buyers/remove/:id", function (req, res) {
+        Todo.findById(
+            req.params.id).deleteOne(function (err, data) {
+
+            if (err) {
+                var response = {
+                    "result": {
+                        "responsecode": 0,
+                        "status": "Error"
+                    }
+                }
+            } else {
+                var response = {
+                    "result": {
+                        "responsecode": 1,
+                        "status": "Removed Succesfully"
+                    }
+                }
+            }
+            res.json(response)
+
+
+        })
+    });
+
     app.post("/api/buyers/login",urlencodedParser,function(req,res){
         // data.push(req.body);
         // res.json(data);
@@ -152,6 +178,48 @@ console.log({buyers:data});
         });
 
         //update
+   app.put("/api/buyers/updateavatar/:id",urlencodedParser,function(req,res){
+            Todo.findById(req.params.id.replace(/\-/g," "),function(err,data){
+
+                if (err) throw err;
+                if(data == null)
+                    {
+                        var response = {
+                            "result":{
+                             "responsecode":0,
+                             "status":"User not found"
+                            }
+                         }
+                         res.json(response);
+                    }
+                    else
+                    {
+
+                        data.avatar = req.body.avatar;
+                        
+
+                        data.save(function(err) {
+                        if (err)
+                        res.send(err);
+                        var response = {
+                            "result":{
+                             "responsecode":1,
+                             "status":"Details Updated Successfully"
+                            }
+                         }
+                         res.json(response);
+                       // res.json(data);
+
+
+
+
+
+
+                });
+            }
+            });
+
+        //update
    app.put("/api/buyers/:id",urlencodedParser,function(req,res){
             Todo.findById(req.params.id.replace(/\-/g," "),function(err,data){
 
@@ -175,6 +243,7 @@ console.log({buyers:data});
                         data.address = req.body.address;
                         data.state = req.body.state;
                         data.country = req.body.country;
+			data.gender=req.body.gender;
                       
 
                         data.save(function(err) {
@@ -197,6 +266,7 @@ console.log({buyers:data});
                 });
             }
             });
+
 
 
 

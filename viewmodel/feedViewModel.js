@@ -9,21 +9,23 @@ mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://tinsoft:'+encodeURICompo
        console.log('connected to the Test db');
    }
  }); 
- var Schema = mongoose.Schema,
+var Schema = mongoose.Schema,
     ObjectId = Schema.ObjectId;
 var feedsSchema = new mongoose.Schema({
-
-    content:String,
+    title: String,
+  content:String,
     content_type:Number,
-    images:[{url:String}],
+    images: [{ url: String }],
     videos: [{
         url: String
     }],
-    comments:[{userid:String,comment:String,created:String}],
+    comments: [{ userid: String, comment: String, created: String }],
     likes: [{
         userid: String
     }],
     storeid: ObjectId,
+    userid: ObjectId,
+    poster_type: Number,
     dateadded: String
     });
 
@@ -70,7 +72,7 @@ module.exports = function (app) {
             })
 
     });
-    app.post("/api/feed/addnew/",urlencodedParser,function(req,res){
+   app.post("/api/feed/addnew/",urlencodedParser,function(req,res){
         // data.push(req.body);
         // res.json(data);
          Todo(req.body).save(function(err,data){
@@ -91,7 +93,7 @@ module.exports = function (app) {
                       "status":"Added Succesfully"
                      }
                   }
-                  res.json(response);
+                 res.json({ id: data._id });
              }
 
              });
@@ -264,17 +266,17 @@ app.post("/api/feed/likes/addnew", urlencodedParser, function (req, res) {
                 //comment: req.body.comment,
                // created: req.body.created
             });
-           
+
             data.save(function (err) {
                 if (err) {
                     throw err;
                 }
-                var ree = data.likes.$pop(); 
+                var ree = data.likes.$pop();
                 res.json({idy:ree});
             })
-            
-           
-           
+
+
+
         }
 
         //console.log({storename:req.params.name});
@@ -344,7 +346,7 @@ app.get("/api/feed/likes/view/:id/", urlencodedParser, function (req, res) {
         } else {
 
             res.send({likes:data.likes});
-            
+
         }
 
     }).sort({_id:-1});
@@ -453,7 +455,7 @@ app.get("/api/feed/comments/view/:id/", urlencodedParser, function (req, res) {
         } else {
 
             res.send({comments:data.comments});
-            
+
         }
 
     }).sort({_id:-1});

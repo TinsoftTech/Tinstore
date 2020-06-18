@@ -45,6 +45,20 @@ module.exports = function (app) {
          }).limit(Number(req.params.num)).sort({_id:-1});
 
      });
+app.get("/api/products/limit/:num/:sk/", function (req, res) {
+
+         Todo.find({}, function (err, data) {
+             if (err) throw err;
+             res.send({
+                 product: data
+             });
+             console.log({
+                 product: data
+             });
+
+         }).skip(Number(req.params.sk)).limit(Number(req.params.num)).sort({_id:-1});
+
+     });
     app.get("/api/products/view/:name", function (req, res) {
         Todo.findById(
             req.params.name.replace(/\-/g, " "), function (err, data) {
