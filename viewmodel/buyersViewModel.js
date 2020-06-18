@@ -26,6 +26,46 @@ var buyerSchema = new mongoose.Schema({
 
 var  Todo = mongoose.model('Buyers',buyerSchema);
 module.exports = function (app) {
+    
+    
+    app.put("/api/buyers/updateavatar/:id",urlencodedParser,function(req,res){
+            Todo.findById(req.params.id.replace(/\-/g," "),function(err,data){
+
+                if (err) throw err;
+                if(data == null)
+                    {
+                        var response = {
+                            "result":{
+                             "responsecode":0,
+                             "status":"User not found"
+                            }
+                         }
+                         res.json(response);
+                    }
+                    else
+                    {
+
+                        data.avatar = req.body.avatar;
+                        
+
+                        data.save(function(err) {
+                        if (err)
+                        res.send(err);
+                        var response = {
+                            "result":{
+                             "responsecode":1,
+                             "status":"Details Updated Successfully"
+                            }
+                         }
+                         res.json(response);
+                     // res.json(data);
+                });
+            }
+            });
+        });
+    
+    
+    
     //show all stores
     app.get("/api/buyers",function(req,res){
         Todo.find({},function(err,data){
