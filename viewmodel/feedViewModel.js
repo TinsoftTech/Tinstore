@@ -52,6 +52,14 @@ module.exports = function (app) {
         }).limit(Number(req.params.num)).sort({_id:-1});
 
     });
+    app.get("/api/feed/skip/:len/limit/:num/",function(req,res){
+        Todo.find({},function(err,data){
+            if (err) throw err;
+            res.send({feed:data});
+            console.log({feed:data});
+        }).skip(Number(req.params.len)).limit(Number(req.params.num)).sort({_id:-1});
+
+    });
     app.get("/api/feed/store/:num/",function(req,res){
         Todo.find({storeid:req.params.num.replace(/\-/g," ")},function(err,data){
             if (err) throw err;
