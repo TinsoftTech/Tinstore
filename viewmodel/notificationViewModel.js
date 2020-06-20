@@ -15,10 +15,7 @@ mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://tinsoft:'+encodeURICompo
     storeid:String,
     productid:String,
     status:Number,
-    dateadded: {
-        type: Date,
-        default: Date.now
-    }
+    dateadded: String
     
     
    
