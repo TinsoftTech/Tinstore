@@ -48,6 +48,15 @@ console.log({store:data});
         }).sort({_id:-1})
 
     });
+    app.get("/api/store/all/limit/:num/",function(req,res){
+        Todo.find({},function(err,data){
+            if (err) throw err;
+            res.send({store:data});
+            console.log({store:data});
+        }).limit(Number(req.params.num)).sort({_id:-1});
+
+    });
+
     app.post("/api/stores/login",urlencodedParser,function(req,res){
         // data.push(req.body);
         // res.json(data);

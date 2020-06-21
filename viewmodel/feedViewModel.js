@@ -44,7 +44,15 @@ module.exports = function (app) {
         }).sort({_id:-1})
 
     });
-     app.get("/api/feed/count",function(req,res){
+    app.get("/api/feed/all/limit/:num/",function(req,res){
+        Todo.find({},function(err,data){
+            if (err) throw err;
+            res.send({feed:data});
+            console.log({feed:data});
+        }).limit(Number(req.params.num)).sort({_id:-1});
+
+    });
+    app.get("/api/feed/count",function(req,res){
         Todo.estimatedDocumentCount({}).exec((err, count) => {
             if (err) {
                 res.send(err);
@@ -55,14 +63,7 @@ module.exports = function (app) {
         });
 
     });
-    app.get("/api/feed/all/limit/:num/",function(req,res){
-        Todo.find({},function(err,data){
-            if (err) throw err;
-            res.send({feed:data});
-            console.log({feed:data});
-        }).limit(Number(req.params.num)).sort({_id:-1});
-
-    });
+    
     app.get("/api/feed/skip/:len/limit/:num/",function(req,res){
         Todo.find({},function(err,data){
             if (err) throw err;

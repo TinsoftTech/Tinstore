@@ -46,6 +46,14 @@ module.exports = function (app) {
         });
 
     });
+    app.get("/api/category/limit/:num/",function(req,res){
+        Todo.find({},function(err,data){
+            if (err) throw err;
+            res.send({Categories:data});
+            console.log({store:data});
+        }).limit(Number(req.params.num)).sort({_id:-1});
+
+    });
     app.post("/api/category/add/", urlencodedParser, function (req, res) {
         // data.push(req.body);
         // res.json(data);
