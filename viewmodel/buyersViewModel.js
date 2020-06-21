@@ -132,7 +132,7 @@ app.post("/api/buyers/login",urlencodedParser,function(req,res){
     // data.push(req.body);
     // res.json(data);
 
-    Todo.findOne({$and:[{email:req.body.email.replace(/\-/g," ")},{password:req.body.password.replace(/\-/g," ")}]},function(err,data){
+    Todo.findOne({$and:[ { "email" : { $regex : new RegExp(req.body.email.replace(/\-/g," "), "i") } },{password:req.body.password.replace(/\-/g," ")}]},function(err,data){
         if (err) throw err;
         if(data==null){
             var response = {
