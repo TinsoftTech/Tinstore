@@ -33,6 +33,20 @@ module.exports = function (app) {
         });
 
     });
+    app.get("/api/featured/limit/:num", function (req, res) {
+
+        Todo.find({}, function (err, data) {
+            if (err) throw err;
+            res.send({
+                featured: data
+            });
+            console.log({
+                product: data
+            });
+
+        }).limit(Number(req.params.num)).sort({_id:-1});
+
+    });
     app.post("/api/featured/add/", urlencodedParser, function (req, res) {
         // data.push(req.body);
         // res.json(data);
