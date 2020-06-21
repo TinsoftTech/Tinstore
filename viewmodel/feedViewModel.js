@@ -44,6 +44,17 @@ module.exports = function (app) {
         }).sort({_id:-1})
 
     });
+     app.get("/api/feed/count",function(req,res){
+        Todo.estimatedDocumentCount({}).exec((err, count) => {
+            if (err) {
+                res.send(err);
+                return;
+            }
+        
+            res.json({ count: count });
+        });
+
+    });
     app.get("/api/feed/all/limit/:num/",function(req,res){
         Todo.find({},function(err,data){
             if (err) throw err;
