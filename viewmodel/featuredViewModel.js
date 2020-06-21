@@ -35,7 +35,7 @@ module.exports = function (app) {
     });
     app.get("/api/featured/limit/:num", function (req, res) {
 
-        Todo.find({}, function (err, data) {
+        Featured.find({}, function (err, data) {
             if (err) throw err;
             res.send({
                 featured: data
