@@ -47,7 +47,7 @@ module.exports = function (app) {
 
     });
     app.get("/api/category/limit/:num/",function(req,res){
-        Todo.find({},function(err,data){
+        Category.find({},function(err,data){
             if (err) throw err;
             res.send({Categories:data});
             console.log({store:data});
