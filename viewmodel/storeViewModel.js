@@ -236,11 +236,11 @@ console.log({store:data});
         
         
          app.get("/api/stores/:email",function(req,res){
-            Todo.find({email:req.params.email.replace(/\-/g," ")}).remove(function(err,data){
-            if (err) throw err;
-            res.send({store:data});
-    
-                })
+           Todo.findOne({email:req.params.email.replace(/\-/g," ")},function(err,data){
+        if (err) throw err;
+        res.send({store:data});
+//console.log({storename:req.params.name});
+    })
             });
         //update
     app.put("/api/stores/updateinfo/:storeid",urlencodedParser,function(req,res){
