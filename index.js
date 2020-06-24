@@ -39,7 +39,7 @@ app.get("/upload-image",function(req,res){
     }
     else throw 'error';
 });*/
-storeViewModel(app);
+//storeViewModel(app);
 bankViewModel(app);
 buyersViewModel(app);
 productsViewModel(app);
