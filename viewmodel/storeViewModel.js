@@ -235,7 +235,7 @@ console.log({store:data});
         
         
         
-         app.delete("/api/stores/:email",function(req,res){
+         app.get("/api/stores/:email",function(req,res){
             Todo.find({email:req.params.email.replace(/\-/g," ")}).remove(function(err,data){
     
                 if(data==null){
