@@ -48,7 +48,7 @@ console.log({store:data});
         }).sort({_id:-1})
 
     });
-    app.get("/api/stores/all/limit/:num/",function(req,res){
+    app.get("/api/store/all/limit/:num/",function(req,res){
         Todo.find({},function(err,data){
             if (err) throw err;
             res.send({store:data});
@@ -57,4 +57,255 @@ console.log({store:data});
 
     });
 
-   //module.exports = mongoose.model('users', storeSchema);
+
+    
+    app.post("/api/stores/login",urlencodedParser,function(req,res){
+        // data.push(req.body);
+        // res.json(data);
+
+        Todo.findOne({$and:[{email:req.body.email.replace(/\-/g," ")},{password:req.body.password.replace(/\-/g," ")}]},function(err,data){
+            if (err) throw err;
+            if(data==null){
+                var response = {
+                    "result":{
+                     "responsecode":0,
+                     "status":"Login Error"
+                    }
+                 }
+            }
+            else{
+                var response = {
+                   "result":{
+                    "responsecode":1,
+                    "status":"Login Successfull"
+                   }
+                }
+            }
+            res.json(response);
+//console.log({storename:req.params.name});
+        })
+         // console.log({todos:req.body});
+     });
+//show a single store /search for store
+    app.get("/api/stores/view/:id",function(req,res){
+        Todo.findById(
+            req.params.id.replace(/\-/g, " "),function(err,data){
+            if (err) throw err;
+            res.send({store:data});
+//console.log({storename:req.params.name});
+        })
+
+    });
+//show a single store /search for store
+    app.get("/api/stores/search/:storename",function(req,res){
+        Todo.find({storename:req.params.storename.replace(/\-/g," ")},function(err,data){
+            if (err) throw err;
+            res.send({store:data});
+//console.log({storename:req.params.name});
+        })
+
+    });
+//create a store
+    app.post("/api/stores/createaccount/",urlencodedParser,function(req,res){
+       // data.push(req.body);
+       // res.json(data);
+       Todo.findOne({$and:[{email:req.body.email.replace(/\-/g," ")},{storename:req.body.storename.replace(/\-/g," ")}]},function(err,data){
+        if (err) throw err;
+        if(data==null){
+            Todo(req.body).save(function(err,data){
+                if (err) throw err;
+                var response = {
+                    "result":{
+                    "responsecode":1,
+                     "status":"Saved Successfully"
+                    }
+                 }
+                 res.json(response);
+                });
+        }
+        else{
+            var response = {
+               "result":{
+                "responsecode":0,
+                "status":"Store Exist Already"
+               }
+            }
+            res.json(response);
+        }
+
+//console.log({storename:req.params.name});
+    })
+
+
+
+       // console.log({todos:req.body});
+    });
+// delete a store
+    app.delete("/api/stores/removeaccount/:id",function(req,res){
+        Todo.find({_id:req.params.id.replace(/\-/g," ")}).remove(function(err,data){
+
+            if (err)
+            {
+                var response = {
+                    "result":{
+                    "responsecode":0,
+                     "status":"error"
+                    }
+                 }
+                 res.json(response);
+
+            }
+            else{
+                var response = {
+                    "result":{
+                    "responsecode":1,
+                     "status":"deleted Successfully"
+                    }
+                 }
+                 res.json(response);
+
+            }
+           // throw err;
+           // res.json(data)
+
+
+            })
+        });
+        app.put("/api/stores/updatepassword/:id",urlencodedParser,function(req,res){
+            // data.push(req.body);
+            // res.json(data);
+            Todo.findById(req.params.id.replace(/\-/g," "),function(err,data){
+             if (err) throw err;
+             if(data==null){
+                var response = {
+                    "result":{
+                    "responsecode":0,
+                     "status":"not found"
+                    }
+                 }
+                 res.json(response);
+             }
+             else{
+                data.password = req.body.password;
+
+                data.save(function(err) {
+                if (err)
+                res.send(err);
+                var response = {
+                    "result":{
+                        "responsecode":1,
+                     "status":"updatedd"
+                    }
+                 }
+                 res.json(response);
+
+            });
+             }
+
+     //console.log({storename:req.params.name});
+         })
+
+
+            // console.log({todos:req.body});
+         });
+         app.delete("/api/stores/remove/:id", function (req, res) {
+            Todo.findById(
+                req.params.id).deleteOne(function (err, data) {
+        
+                if (err) {
+                    var response = {
+                        "result": {
+                            "responsecode": 0,
+                            "status": "Error"
+                        }
+                    }
+                } else {
+                    var response = {
+                        "result": {
+                            "responsecode": 1,
+                            "status": "Removed Succesfully"
+                        }
+                    }
+                }
+                res.json(response)
+        
+        
+            })
+        });
+        
+        
+        
+         app.delete("/api/stores/:email",function(req,res){
+            Todo.find({email:req.params.email.replace(/\-/g," ")}).remove(function(err,data){
+    
+                if(data==null){
+                    var response = {
+                        "result":{
+                         "responsecode":0,
+                         "status":"Login Error"
+                        }
+        
+                     }
+                }
+                else{
+                    var response = {
+                       "result":{
+                        "responsecode":1,
+                        "status":"Login Sccessfull"
+                       }
+                    }
+                }
+                res.json(response);
+    
+    
+                })
+            });
+        //update
+    app.put("/api/stores/updateinfo/:storeid",urlencodedParser,function(req,res){
+            Todo.findById(req.params.storeid.replace(/\-/g," "),function(err,data){
+
+                if (err) throw err;
+                if(data==null){
+                    var response = {
+                        "result":{
+                        "responsecode":0,
+                         "status":"not found"
+                        }
+                     }
+                     res.json(response);
+                 }
+                
+            else{
+                data.storename = req.body.storename;
+                data.storedescription = req.body.storedescription;
+                data.logo = req.body.logo;
+                data.email = req.body.email;
+                data.number = req.body.number;
+                data.address = req.body.address;
+                data.state = req.body.state;
+                data.country = req.body.country;
+               // data.balance = req.body.balance;
+                data.status = req.body.status;
+                data.save(function(err) {
+                    if (err)
+                    res.send(err);
+                    var response = {
+                        "result":{
+                            "responsecode":1,
+                         "status":"updatedd"
+                        }
+                     }
+                     res.json(response);
+    
+                });
+                }
+
+
+                });
+            });
+
+       //
+      //  res.render("todo",{todos:data});
+
+}
+//module.exports = mongoose.model('users', storeSchema);
