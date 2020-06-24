@@ -48,7 +48,7 @@ console.log({store:data});
         }).sort({_id:-1})
 
     });
-    app.get("/api/store/all/limit/:num/",function(req,res){
+    app.get("/api/stores/all/limit/:num/",function(req,res){
         Todo.find({},function(err,data){
             if (err) throw err;
             res.send({store:data});
