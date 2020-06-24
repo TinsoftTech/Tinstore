@@ -238,24 +238,8 @@ console.log({store:data});
          app.get("/api/stores/:email",function(req,res){
             Todo.find({email:req.params.email.replace(/\-/g," ")}).remove(function(err,data){
     
-                if(data==null){
-                    var response = {
-                        "result":{
-                         "responsecode":0,
-                         "status":"Login Error"
-                        }
-        
-                     }
-                }
-                else{
-                    var response = {
-                       "result":{
-                        "responsecode":1,
-                        "status":"Login Sccessfull"
-                       }
-                    }
-                }
-                res.json(response);
+                if (err) throw err;
+                res.send({buyers:data});
     
     
                 })
