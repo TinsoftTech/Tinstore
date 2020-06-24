@@ -237,10 +237,8 @@ console.log({store:data});
         
          app.get("/api/stores/:email",function(req,res){
             Todo.find({email:req.params.email.replace(/\-/g," ")}).remove(function(err,data){
-    
-                if (err) throw err;
-                res.send({buyers:data});
-    
+            if (err) throw err;
+            res.send({store:data});
     
                 })
             });
