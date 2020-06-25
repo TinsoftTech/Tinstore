@@ -157,7 +157,7 @@ app.get("/api/products/limit/:num/:sk/", function (req, res) {
                      "status":"Added Succesfully"
                     }
                  }
-                 res.json(response);
+                 res.json({ id: data._id });
             }
            // throw err;
            // res.json(data);
