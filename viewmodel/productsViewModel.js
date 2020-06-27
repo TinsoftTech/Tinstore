@@ -255,6 +255,7 @@ app.delete("/api/products/images/remove/:id/:name", urlencodedParser, function (
                 if (err) throw err;
                 //data.storename = req.body.storename;
                // data.storeid = req.body.storedescription;
+                 data.category = req.body.category;
                 data.name = req.body.name;
                 data.price = req.body.price;
                 data.quantity = req.body.quantity;
