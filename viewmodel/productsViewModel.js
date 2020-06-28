@@ -79,6 +79,14 @@ app.get("/api/products/limit/:num/:sk/", function (req, res) {
         })
 
     });
+    app.get("/api/products/search/:storeid/:productname/",function(req,res){
+        Todo.find({$and:[ { "name" : { $regex : new RegExp(req.params.productname.replace(/\-/g," "), "i") } },{storeid:req.params.storeid.replace(/\-/g," ")}]},function(err,data){
+            if (err) throw err;
+            res.send({product:data});
+//console.log({storename:req.params.name});
+        })
+
+    });
     app.delete("/api/products/remove/:id", function (req, res) {
         Todo.findByIdAndDelete(
             req.params.id.replace(/\-/g, " "), function (err, data) {
