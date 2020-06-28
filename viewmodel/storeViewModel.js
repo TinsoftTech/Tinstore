@@ -57,7 +57,43 @@ console.log({store:data});
 
     });
 
+  app.put("/api/stores/updateavatar/:id",urlencodedParser,function(req,res){
+            Todo.findById(req.params.id.replace(/\-/g," "),function(err,data){
 
+                if (err) throw err;
+                if(data == null)
+                    {
+                        var response = {
+                            "result":{
+                             "responsecode":0,
+                             "status":"User not found"
+                            }
+                         }
+                         res.json(response);
+                    }
+                    else
+                    {
+
+                        data.logo = req.body.avatar;
+                        
+
+                        data.save(function(err) {
+                        if (err)
+                        res.send(err);
+                        var response = {
+                            "result":{
+                             "responsecode":1,
+                             "status":"Details Updated Successfully"
+                            }
+                         }
+                         res.json(response);
+                     // res.json(data);
+                });
+            }
+            });
+        });
+    
+    
     
     app.post("/api/stores/login",urlencodedParser,function(req,res){
         // data.push(req.body);
