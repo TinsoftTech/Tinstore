@@ -41,7 +41,7 @@ app.get("/api/notifications/",function(req,res){
         if (err) throw err;
         res.send({notifications:data});
 //console.log({storename:req.params.name});
-    })
+    }.sort({_id:-1})
 
 });
 app.get("/api/notifications/view/:id",function(req,res){
