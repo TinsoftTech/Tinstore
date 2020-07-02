@@ -54,7 +54,7 @@ app.get("/api/notifications/",function(req,res){
     });
    
 app.get("/api/notifications/view/:id",function(req,res){
-    Todo.find({$and:[ {storeid:req.params.id.replace(/\-/g," ")},{status:1}]},function(err,data){
+    Todo.find({storeid:req.params.id.replace(/\-/g," ")},function(err,data){
         if (err) throw err;
         res.send({notifications:data});
 //console.log({storename:req.params.name});
