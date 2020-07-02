@@ -41,24 +41,16 @@ app.get("/api/notifications/",function(req,res){
         if (err) throw err;
         res.send({notifications:data});
 //console.log({storename:req.params.name});
-    }.sort({_id:-1})
+    }
 
 });
-    app.get("/api/notifications/active/:name/",function(req,res){
-        Todo.find({status:req.params.name.replace(/\-/g," ")},function(err,data){
-            if (err) throw err;
-           res.send({notifications:data});
-//console.log({storename:req.params.name});
-    }.sort({_id:-1})
-
-    });
-   
+    
 app.get("/api/notifications/view/:id",function(req,res){
     Todo.find({storeid:req.params.id.replace(/\-/g," ")},function(err,data){
         if (err) throw err;
         res.send({notifications:data});
 //console.log({storename:req.params.name});
-    }).sort({_id:-1});
+    })
 
 });
 //create a store
