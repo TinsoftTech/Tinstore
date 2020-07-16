@@ -48,7 +48,7 @@ module.exports = function (app) {
     });
     
     app.get("/api/category/count/:name",function(req,res){
-        Category.estimatedDocumentCount({name:req.params.name}).exec((err, count) => {
+        Category.estimatedDocumentCount({name:"Womens Bag"}).exec((err, count) => {
             if (err) {
                 res.send(err);
                 return;
