@@ -60,7 +60,7 @@ app.get("/api/follow/check/:user/:store/",urlencodedParser,function(req,res){
     // console.log({todos:req.body});
  });
     
-   app.delete("/api/follow/remove/",urlencodedParser,function(req,res){
+   app.post("/api/follow/remove/",urlencodedParser,function(req,res){
     // data.push(req.body);
     // res.json(data);
     Todo.findOne({$and:[{user:req.body.user.replace(/\-/g," ")},{storeid:req.body.storeid.replace(/\-/g," ")}]}).remove(function(err,data){
