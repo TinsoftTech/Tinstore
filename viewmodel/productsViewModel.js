@@ -31,6 +31,17 @@ module.exports = function (app) {
         }).sort({_id:-1})
 
     });
+    app.get("/api/products/count/:name",function(req,res){
+        Todo.estimatedDocumentCount({category:req.params.name}).exec((err, count) => {
+            if (err) {
+                res.send(err);
+                return;
+            }
+        
+            res.json({ count: count });
+        });
+
+    });
      app.get("/api/products/limit/:num", function (req, res) {
 
          Todo.find({}, function (err, data) {
