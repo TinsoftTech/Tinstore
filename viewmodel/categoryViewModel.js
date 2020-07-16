@@ -46,6 +46,19 @@ module.exports = function (app) {
         });
 
     });
+    
+    app.get("/api/category/count",function(req,res){
+        Category.estimatedDocumentCount({}).exec((err, count) => {
+            if (err) {
+                res.send(err);
+                return;
+            }
+        
+            res.json({ count: count });
+        });
+
+    });
+    
     app.get("/api/category/limit/:num/",function(req,res){
         Category.find({},function(err,data){
             if (err) throw err;
