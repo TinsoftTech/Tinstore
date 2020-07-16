@@ -32,7 +32,7 @@ module.exports = function (app) {
 
     });
     app.get("/api/products/count/:name",function(req,res){
-        Todo.estimatedDocumentCount({category:req.params.name}).exec((err, count) => {
+        Todo.countDocuments({category:req.params.name}).exec((err, count) => {
             if (err) {
                 res.send(err);
                 return;
