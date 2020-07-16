@@ -59,6 +59,39 @@ app.get("/api/follow/check/:user/:store/",urlencodedParser,function(req,res){
 //updateQuantity("5d6116d1b113ab21b440bac8", 4);
     // console.log({todos:req.body});
  });
+    
+   app.post("/api/follow/remove/",urlencodedParser,function(req,res){
+    // data.push(req.body);
+    // res.json(data);
+    Todo.findOne({$and:[{user:req.body.user.replace(/\-/g," ")},{storeid:req.body.storeid.replace(/\-/g," ")}]}).remove(function(err,data){
+
+                if (err) 
+                {
+                    var response = {
+                        "result":{
+                         "responsecode":0,   
+                         "status":"Error"
+                        }
+                     }
+                }
+                else{
+                    var response = {
+                        "result":{
+                         "responsecode":1,   
+                         "status":"Removed Succesfully"
+                        }
+                     }
+                }
+                res.json(response)
+                
+                
+                }) 
+//updateQuantity("5d6116d1b113ab21b440bac8", 4);
+    // console.log({todos:req.body});
+ });  
+            
+       
+        
 //create a store
 app.post("/api/follow/addnew/",urlencodedParser,function(req,res){
     // data.push(req.body);
