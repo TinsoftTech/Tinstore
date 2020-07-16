@@ -125,6 +125,31 @@ app.post("/api/follow/addnew/",urlencodedParser,function(req,res){
               //  console.log('product saved');
                 });
         }
+        else{
+        Todo.findOne({$and:[{user:req.body.user.replace(/\-/g," ")},{storeid:req.body.storeid.replace(/\-/g," ")}]}).remove(function(err,data){
+
+                if (err) 
+                {
+                    var response = {
+                        "result":{
+                         "responsecode":0,   
+                         "status":"Error"
+                        }
+                     }
+                }
+                else{
+                    var response = {
+                        "result":{
+                         "responsecode":1,   
+                         "status":"Removed Succesfully"
+                        }
+                     }
+                }
+                res.json(response)
+                
+                
+                }) 
+        }
       //  res.send({follow:data});
 //console.log({storename:req.params.name});
     })
