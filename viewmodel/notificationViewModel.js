@@ -50,8 +50,8 @@ app.get("/api/notifications/",function(req,res){
         Todo.aggregate([
             { $lookup:
                {
-                 from: 'stores',
-                 localField: 'storeid',
+                 from: 'products',
+                 localField: 'productid',
                  foreignField: '_id',
                  as: 'Notificationdetails'
                }
