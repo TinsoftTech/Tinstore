@@ -56,11 +56,12 @@ app.get("/api/notifications/",function(req,res){
          as: 'orderdetails'
        }
      }
-    ]).toArray(function(err, res) {
-    if (err) throw err;
-    console.log(JSON.stringify(res));
-   
-  });
+    ]).exec(function(err, results){
+                res.send({
+                    product: results
+                });
+            console.log(results);
+        })
 
 });
     
