@@ -44,6 +44,25 @@ app.get("/api/notifications/",function(req,res){
     })
 
 });
+   
+   
+   app.get("/api/notifications/details",function(req,res){
+    Todo.aggregate([
+    { $lookup:
+       {
+         from: 'stores',
+         localField: 'storeid',
+         foreignField: '_id',
+         as: 'orderdetails'
+       }
+     }
+    ]).toArray(function(err, res) {
+    if (err) throw err;
+    console.log(JSON.stringify(res));
+   
+  });
+
+});
     
 app.get("/api/notifications/view/:id",function(req,res){
     Todo.find({$and:[{storeid:req.params.id.replace(/\-/g," ")},{status:1}]},function(err,data){
