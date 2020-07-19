@@ -9,12 +9,11 @@ mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://tinsoft:'+encodeURICompo
        console.log('connected to the Test db');
    }
  }); 
-var Schema = mongoose.Schema,
-    ObjectId = Schema.ObjectId;
+
  var notificationSchema = new mongoose.Schema({
   
     content:String,
-    storeid: ObjectId,
+    storeid: String,
     productid:String,
     status:Number,
     dateadded: String
