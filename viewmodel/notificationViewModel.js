@@ -9,10 +9,12 @@ mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://tinsoft:'+encodeURICompo
        console.log('connected to the Test db');
    }
  }); 
+var Schema = mongoose.Schema,
+    ObjectId = Schema.ObjectId;
  var notificationSchema = new mongoose.Schema({
   
     content:String,
-    storeid:String,
+    storeid: ObjectId,
     productid:String,
     status:Number,
     dateadded: String
@@ -50,8 +52,8 @@ app.get("/api/notifications/",function(req,res){
         Todo.aggregate([
             { $lookup:
                {
-                 from: 'products',
-                 localField: 'productid',
+                 from: 'stores',
+                 localField: 'storeid',
                  foreignField: '_id',
                  as: 'Notificationdetails'
                }
