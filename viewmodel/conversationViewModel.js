@@ -57,7 +57,7 @@ module.exports = function (app) {
     app.post("/api/conversations/add/", urlencodedParser, function (req, res) {
         // data.push(req.body);
         // res.json(data);
-        Category(req.body).save(function (err, data) {
+        Conversations(req.body).save(function (err, data) {
             if (err) {
                 var response = {
                     "result": {
@@ -84,7 +84,7 @@ module.exports = function (app) {
     });
     // delete a store
     app.delete("/api/conversations/remove/:id", function (req, res) {
-        Category.findById(req.params.id).deleteOne(function (err, data) {
+        Conversations.findById(req.params.id).deleteOne(function (err, data) {
 
             if (err) {
                 var response = {
@@ -109,7 +109,7 @@ module.exports = function (app) {
 
     //update a store
     app.get("/api/conversations/store/:id/",function(req,res){
-        Todo.find({storeid:req.params.id.replace(/\-/g," ")},function(err,data){
+        Conversations.find({storeid:req.params.id.replace(/\-/g," ")},function(err,data){
             if (err) throw err;
             res.send({Conversations:data});
            // console.log({feed:data});
@@ -117,7 +117,7 @@ module.exports = function (app) {
 
     });
     app.get("/api/conversations/buyer/:id/",function(req,res){
-        Todo.find({storeid:req.params.id.replace(/\-/g," ")},function(err,data){
+        Conversations.find({storeid:req.params.id.replace(/\-/g," ")},function(err,data){
             if (err) throw err;
             res.send({Conversations:data});
            // console.log({feed:data});
