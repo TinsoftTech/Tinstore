@@ -116,8 +116,8 @@ module.exports = function (app) {
         }).sort({_id:-1});
 
     });
-    app.get("/api/conversation/store/details/:id/",function(req,res){
-        Conversation.aggregate([
+    app.get("/api/conversations/store/details/:id/",function(req,res){
+        Conversations.aggregate([
             { $lookup:
                {
                  from: 'buyers',
