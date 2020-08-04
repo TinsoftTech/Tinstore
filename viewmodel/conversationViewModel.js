@@ -117,7 +117,7 @@ module.exports = function (app) {
 
     });
     app.get("/api/conversations/buyer/:id/",function(req,res){
-        Conversations.find({storeid:req.params.id.replace(/\-/g," ")},function(err,data){
+        Conversations.find({buyerid:req.params.id.replace(/\-/g," ")},function(err,data){
             if (err) throw err;
             res.send({Conversations:data});
            // console.log({feed:data});
