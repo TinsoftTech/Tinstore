@@ -11,9 +11,11 @@ if(err){
        console.log('connected to the Test db');
    }
  }); 
+var Schema = mongoose.Schema,
+    ObjectId = Schema.ObjectId;
  var conversationSchema = new mongoose.Schema({
     storeid: String,
-    buyerid: String,
+    buyerid: ObjectId,
 });
 
 var Conversations = mongoose.model('Conversation', conversationSchema);
