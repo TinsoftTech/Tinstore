@@ -116,6 +116,23 @@ module.exports = function (app) {
         }).sort({_id:-1});
 
     });
+    app.get("/api/conversation/store/details/:id/",function(req,res){
+        Conversation.aggregate([
+            { $lookup:
+               {
+                 from: 'buyers',
+                 localField: 'buyerid',
+                 foreignField: '_id',
+                 as: 'Convdetails'
+               }
+             }
+            ]).exec(function(err, results){
+                res.send({
+                    Conversations: results
+                });
+            console.log(results);
+        })
+    })
     app.get("/api/conversations/buyer/:id/",function(req,res){
         Conversations.find({buyerid:req.params.id.replace(/\-/g," ")},function(err,data){
             if (err) throw err;
