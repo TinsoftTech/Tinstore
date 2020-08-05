@@ -15,7 +15,7 @@ if(err){
 var Schema = mongoose.Schema,
     ObjectId = Schema.ObjectId;
  var conversationSchema = new mongoose.Schema({
-    storeid: String,
+    storeid: ObjectId,
     buyerid: ObjectId,
 });
 
@@ -119,7 +119,7 @@ module.exports = function (app) {
         }).sort({_id:-1});
 
     });
-    app.get("/api/conversations/store/details/:id/",function(req,res){
+    app.get("/api/conversations/store/details/",function(req,res){
         Conversations.aggregate([
             { $lookup:
                {
