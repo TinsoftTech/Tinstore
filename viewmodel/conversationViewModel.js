@@ -15,8 +15,8 @@ if(err){
 var Schema = mongoose.Schema,
     ObjectId = Schema.ObjectId;
  var conversationSchema = new mongoose.Schema({
-    storeid: ObjectId,
-    buyerid: ObjectId,
+    storeid: String,
+    buyerid: String,
 });
 
 var Conversations = mongoose.model('Conversation', conversationSchema);
