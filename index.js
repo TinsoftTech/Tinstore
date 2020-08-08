@@ -16,6 +16,7 @@ var feedbackViewModel = require("./viewmodel/feedbacksViewModel");
 var cartViewModel = require("./viewmodel/cartViewModel");
 var carouselViewModel = require("./viewmodel/carouselViewModel");
 var conversationViewModel = require("./viewmodel/conversationViewModel");
+var messageViewModel = require("./viewmodel/messageViewModel");
 var  app = express();
 //set up template engine
 app.set("view engine","ejs");
@@ -47,6 +48,7 @@ productsdescriptionViewModel(app);
 ordersViewModel(app);
 cartViewModel(app);
 conversationViewModel(app);
+messageViewModel(app);
 carouselViewModel(app);
 categoryViewModel(app);
 feedViewModel(app);
