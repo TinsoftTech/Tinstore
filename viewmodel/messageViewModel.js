@@ -18,6 +18,7 @@ var Schema = mongoose.Schema,
     message: String,
     storeid: String,
     buyerid: String,
+    senderid: String,
     sentstatus:String,
     readstatus:String,
     dateadded: String
