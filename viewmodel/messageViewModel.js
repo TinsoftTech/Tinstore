@@ -19,6 +19,7 @@ var Schema = mongoose.Schema,
     storeid: String,
     buyerid: String,
     senderid: String,
+    imageurl: String,
     sentstatus:String,
     readstatus:String,
     dateadded: String
