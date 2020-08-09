@@ -44,18 +44,15 @@ module.exports = function (app) {
     });
 
     
-    app.get("/api/messages/count/",function(req,res){
-        Message.estimatedDocumentCount({readstatus:0}).exec((err, count) => {
-            if (err) {
-                res.send(err);
-                return;
-            }
-        
-            res.json({ count: count });
-        });
-
-    });
     
+    app.get("/api/messages/count/:id",function(req,res){
+    Message.find({$and:[{senderid: { "$ne": req.params.id.replace(/\-/g," ") }},{status:0}]},function(err,data){
+        if (err) throw err;
+        res.send({Message:data});
+//console.log({storename:req.params.name});
+    })
+
+});
     app.get("/api/messages/limit/:num/",function(req,res){
         Message.find({},function(err,data){
             if (err) throw err;
