@@ -96,32 +96,33 @@ console.log({store:data});
     
     
     app.post("/api/stores/login",urlencodedParser,function(req,res){
-        // data.push(req.body);
-        // res.json(data);
-{ $regex : new RegExp(req.body.email.replace(/\-/g," "), "i") } }
-        Todo.findOne({$and:[{ "email" : { $regex : new RegExp(req.body.email.replace(/\-/g," "), "i") } },{password:req.body.password.replace(/\-/g," ")}]},function(err,data){
-            if (err) throw err;
-            if(data==null){
-                var response = {
-                    "result":{
-                     "responsecode":0,
-                     "status":"Login Error"
-                    }
-                 }
-            }
-            else{
-                var response = {
-                   "result":{
-                    "responsecode":1,
-                    "status":"Login Successfull"
-                   }
+       Todo.findOne({$and:[ { "email" : { $regex : new RegExp(req.body.email.replace(/\-/g," "), "i") } },{password:req.body.password.replace(/\-/g," ")}]},function(err,data){
+        if (err) throw err;
+        if(data==null){
+            var response = {
+                "result":{
+                 "responsecode":0,
+                 "status":"Login Error"
                 }
+
+             }
+        }
+        else{
+            var response = {
+               "result":{
+                "responsecode":1,
+                "status":"Login Sccessfull"
+               }
             }
-            res.json(response);
+        }
+        res.json(response);
+       // check();
 //console.log({storename:req.params.name});
-        })
-         // console.log({todos:req.body});
-     });
+    })
+     // console.log({todos:req.body});
+ });
+
+
 //show a single store /search for store
     app.get("/api/stores/view/:id",function(req,res){
         Todo.findById(
